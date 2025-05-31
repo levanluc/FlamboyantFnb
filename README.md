@@ -1,0 +1,3 @@
+# FlamboyantFnb
+
+**FlamboyantFnb** is a comprehensive Food & Beverage (F&B) management solution designed specifically for small businesses. This project streamlines daily operations, from order management and inventory tracking to sales analytics and customer engagement. With an intuitive interface and customizable features, FlamboyantFnb empowers small F&B businesses to enhance efficiency, improve customer service, and drive growth.
