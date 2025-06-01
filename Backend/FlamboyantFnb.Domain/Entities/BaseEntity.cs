@@ -1,8 +1,5 @@
-﻿using Amazon.DynamoDBv2.DataModel;
-using FlamboyantFnb.Domain.Interfaces;
+﻿using FlamboyantFnb.Domain.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FlamboyantFnb.Domain.Entities
 {

@@ -1,6 +1,7 @@
 
 using FlamboyantFnb.Extensions;
 using FlamboyantFnb.Helper;
+using Serilog;
 
 namespace FlamboyantFnb.API
 {
@@ -8,7 +9,14 @@ namespace FlamboyantFnb.API
     {
         public static void Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console() // Send logs to console
+                                   //.WriteTo.Seq("http://localhost:5341") // Optional: send to Seq
+                .Enrich.FromLogContext()
+                .MinimumLevel.Information()
+                .CreateLogger();
             var builder = WebApplication.CreateBuilder(args);
+            builder.Host.UseSerilog();
             AppServiceConfig.Initialize(builder.Configuration);
             // Add services to the container.
 

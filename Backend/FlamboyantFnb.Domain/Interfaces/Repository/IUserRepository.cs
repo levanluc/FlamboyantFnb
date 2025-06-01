@@ -8,7 +8,6 @@ namespace FlamboyantFnb.Domain.Interfaces.Repository
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        Task<User> GetByEmailAsync(string email);
-        Task<List<User>> GetAllAsync(UserFilterReq req, CancellationToken cancellationToken = default);
+        Task<User> GetByUserNameAsync(string username);
     }
 }

@@ -1,13 +1,10 @@
-﻿using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.DocumentModel;
-using FlamboyantFnb.Domain.Entities;
+﻿using FlamboyantFnb.Domain.Entities;
 using FlamboyantFnb.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
 //using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

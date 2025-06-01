@@ -28,7 +28,7 @@ namespace FlamboyantFnb.Services
         }
         public async Task<LoginResponse> LoginAsync(LoginReq req)
         {
-            var existingUser = await _userRepository.GetByEmailAsync(req.Email);
+            var existingUser = await _userRepository.GetByUserNameAsync(req.UserName);
             if (existingUser == null) throw new Exception("User doesn't exist");
 
             var hasher = new PasswordHasher<User>();
@@ -37,8 +37,8 @@ namespace FlamboyantFnb.Services
 
 
             // Missing Authentication step
-            var token = JwtHandler.GenerateToken(existingUser.Email,
-                existingUser.Id,
+            var token = JwtHandler.GenerateToken(existingUser.UserName,
+                existingUser.Id + string.Empty,
                 AppServiceConfig.PrivateKey,
                 DateTime.UtcNow.AddDays(AppServiceConfig.DayDuration),
                 AppServiceConfig.Issuer,
@@ -54,7 +54,7 @@ namespace FlamboyantFnb.Services
             // set cookie header
             var retVal = new LoginResponse()
             {
-                Email = existingUser.Email,
+                Username = existingUser.UserName,
                 Token = token,
                 Id = existingUser.Id,
                 SessionId = sessionId,
@@ -62,21 +62,10 @@ namespace FlamboyantFnb.Services
             return retVal;
         }
 
-        public async Task<User> GetByEmailAsync(string email)
-        {
-            var existingUser = await _userRepository.GetByEmailAsync(email);
-            return existingUser;
-        }
-
-        public async Task<User> GetByIdAsync(string id)
+        public async Task<User> GetByIdAsync(int id)
         {
             var existingUser = await _userRepository.GetByIdAsync(id);
             return existingUser;
-        }
-
-        public async Task<List<User>> GetAllAsync(UserFilterReq req)
-        {
-            return await _userRepository.GetAllAsync(req);
         }
     }
 }

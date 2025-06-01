@@ -12,6 +12,10 @@ using FlamboyantFnb.Domain.Context;
 using FlamboyantFnb.Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using FlamboyantFnb.Domain.Interfaces.Repository;
+using FlamboyantFnb.Domain.Interfaces.Services;
+using FlamboyantFnb.Services;
+using Serilog;
 
 namespace FlamboyantFnb.Extensions
 {
@@ -21,7 +25,6 @@ namespace FlamboyantFnb.Extensions
         {
             applicationBuilder.Run(async (httpContext) =>
             {
-                var logger = httpContext.RequestServices.GetService<ILogger>();
                 var exceptionFeature = httpContext.Features.Get<IExceptionHandlerFeature>();
                 var exception = exceptionFeature?.Error;
 
@@ -30,8 +33,9 @@ namespace FlamboyantFnb.Extensions
 
                 if (exception is ValidateException)
                 {
-                    logger?.LogInformation(exception, exception?.Message);
+                    Log.Information("Validation error: {Message}", exception?.Message);
                     resp.Message = exception?.Message;
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 }
                 else if (exception is UnauthorizedAccessException || exception is SecurityTokenExpiredException)
                 {
@@ -40,7 +44,7 @@ namespace FlamboyantFnb.Extensions
                 }
                 else
                 {
-                    logger?.LogError(exception, exception?.Message);
+                    Log.Error(exception, exception?.Message!);
                     resp.Message = "Something went wrong. Please try again!";
                 }
                 var jsonRes = JsonSerializer.Serialize(resp);
@@ -70,11 +74,8 @@ namespace FlamboyantFnb.Extensions
         public static void ConfigServices(this IHostApplicationBuilder builder)
         {
             #region repository
-            //builder.Services.AddScoped<IUserRepository, UserRepository>();
-            //builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-            //builder.Services.AddScoped<IRoomRepository, RoomRepository>();
-            //builder.Services.AddScoped<IUserRoomRepository, UserRoomRepository>();
-            //builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var connectionStr = builder.Configuration.GetConnectionString("FlamboyantEntity");
             builder.Services.AddDbContext<FnbDbContext>(options => options.UseSqlServer(connectionStr));
@@ -102,13 +103,12 @@ namespace FlamboyantFnb.Extensions
                 var nonExistentUser = new FnbExecutionContext()
                 {
                     SessionId = string.Empty,
-                    UserId = string.Empty,
                     FullName = string.Empty,
-                    Email = string.Empty
+                    UserName = string.Empty
                 };
                 var httpContextAccessor = sp.GetRequiredService<IHttpContextAccessor>();
                 var context = httpContextAccessor.HttpContext!;
-                var sessionId = context.Request.Cookies["flamboyant-session-id"];
+                var sessionId = context.Request.Cookies[Constant.SessionCookieHeader];
                 if (string.IsNullOrEmpty(sessionId)) return nonExistentUser;
 
                 var cacheClient = context.RequestServices.GetService<ICacheClient>()!;
@@ -122,7 +122,7 @@ namespace FlamboyantFnb.Extensions
                     SessionId = sessionId,
                     UserId = user.Id,
                     FullName = user.FullName,
-                    Email = user.Email
+                    UserName = user.UserName
                 };
             });
         }
