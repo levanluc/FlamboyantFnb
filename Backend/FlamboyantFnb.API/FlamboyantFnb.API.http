@@ -1,0 +1,6 @@
+@FlamboyantFnb.API_HostAddress = http://localhost:5282
+
+GET {{FlamboyantFnb.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

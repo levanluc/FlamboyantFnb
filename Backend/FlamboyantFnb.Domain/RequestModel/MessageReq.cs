@@ -1,0 +1,33 @@
+﻿using FlamboyantFnb.Domain.Enum;
+using System;
+using System.Collections.Generic;
+using System.Net.WebSockets;
+using System.Text;
+
+namespace FlamboyantFnb.Domain.RequestModel
+{
+    public class WebSocketBaseMessage
+    {
+        public WebSocketBaseMessageType Type { get; set; }
+        public string SerializedData { get; set; }
+    }
+    public class MessageRequest
+    {
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
+        public string Content { get; set; }
+        public bool IsGroup { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    }
+
+    public class MessageFilterRequest
+    {
+        public string RoomId { get; set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? ToDate { get; set; }
+        public int Limit { get; set; } = 20;
+        public int Offset { get; set; } = 0;
+    }
+}
