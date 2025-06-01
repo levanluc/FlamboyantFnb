@@ -10,7 +10,7 @@ namespace FlamboyantFnb.API
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console() // Send logs to console
+                .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
                                    //.WriteTo.Seq("http://localhost:5341") // Optional: send to Seq
                 .Enrich.FromLogContext()
                 .MinimumLevel.Information()
