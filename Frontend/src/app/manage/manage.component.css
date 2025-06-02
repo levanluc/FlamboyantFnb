@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  background-color: #f0f0f0; /* Light gray background */
+  min-height: 100vh; /* Ensure it covers the full viewport height */
+}
