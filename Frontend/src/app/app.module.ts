@@ -10,6 +10,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpErrorInterceptor } from '../interceptors/http-error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -38,7 +39,15 @@ const routes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true
-    }
+    },
+    provideHotToastConfig({
+      duration: 3000,
+      position: 'bottom-right',
+      style: {
+        background: '#333',
+        color: '#fff'
+      }
+    })
   ],
   bootstrap: [AppComponent]
 })

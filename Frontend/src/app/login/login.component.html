@@ -2,6 +2,11 @@
   <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Đăng nhập</h2>
 
+    <!-- Error message display -->
+    <div *ngIf="errorMessage" class="mb-4 p-3 bg-red-100 text-red-700 rounded">
+      {{ errorMessage }}
+    </div>
+
     <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
       <div *ngIf="loginForm.submitted && loginForm.invalid" class="mb-4">
         <div *ngIf="loginForm.controls['username']?.errors?.['required']" class="text-red-600 text-sm">
@@ -16,14 +21,14 @@
       </div>
       <div class="mb-4">
         <label for="email" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
-        <input type="text" name="username" ngModel #username="ngModel" required
+        <input type="text" name="username" ngModel #username required
           placeholder="Nhập tài khoản của bạn"
           class="mt-1 p-3 w-full border border-gray-300 rounded-lg" />
       </div>
 
       <div class="mb-6">
         <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
-        <input type="password" name="password" ngModel #password="ngModel" required
+        <input type="password" name="password" ngModel #password required
           placeholder="Nhập mật khẩu"
           class="mt-1 p-3 w-full border border-gray-300 rounded-lg" />
       </div>

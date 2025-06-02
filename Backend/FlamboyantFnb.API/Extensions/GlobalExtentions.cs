@@ -75,6 +75,7 @@ namespace FlamboyantFnb.Extensions
         {
             #region repository
             builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IMerchantRepository, MerchantRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
 
             var connectionStr = builder.Configuration.GetConnectionString("FlamboyantEntity");

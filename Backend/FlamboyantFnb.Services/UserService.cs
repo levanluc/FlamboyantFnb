@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using FlamboyantFnb.Domain.Interfaces.Cache;
 using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
+using FlamboyantFnb.Domain.Exceptions;
 
 namespace FlamboyantFnb.Services
 {
@@ -29,11 +30,12 @@ namespace FlamboyantFnb.Services
         public async Task<LoginResponse> LoginAsync(LoginReq req)
         {
             var existingUser = await _userRepository.GetByUserNameAsync(req.UserName);
-            if (existingUser == null) throw new Exception("User doesn't exist");
+            if (existingUser == null) throw new ValidateException("Sai tài khoản hoặc mật khẩu.");
 
             var hasher = new PasswordHasher<User>();
             var result = hasher.VerifyHashedPassword(existingUser, existingUser.Password, req.Password);
-            if (result == PasswordVerificationResult.Failed) throw new Exception("Wrong Password");
+            if (result == PasswordVerificationResult.Failed) throw new ValidateException("Sai tài khoản hoặc mật khẩu.");
+
 
 
             // Missing Authentication step

@@ -1,5 +1,6 @@
 ﻿using FlamboyantFnb.Domain.Interfaces;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlamboyantFnb.Domain.Entities
 {

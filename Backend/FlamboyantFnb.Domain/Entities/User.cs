@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FlamboyantFnb.Domain.Entities
@@ -11,5 +12,9 @@ namespace FlamboyantFnb.Domain.Entities
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+
+        public int MerchantId { get; set; }
+        [ForeignKey(nameof(MerchantId))]
+        public Merchant Merchant { get; set; }
     }
 }
