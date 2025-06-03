@@ -1,4 +1,5 @@
-﻿using FlamboyantFnb.Domain.Entities;
+﻿using FlamboyantFnb.Domain.Context;
+using FlamboyantFnb.Domain.Entities;
 using FlamboyantFnb.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +15,11 @@ namespace FlamboyantFnb.Infrastructure.Repository
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         protected readonly FnbDbContext _context;
-        public BaseRepository(FnbDbContext context)
+        protected readonly FnbExecutionContext _executionContext;
+        public BaseRepository(FnbDbContext context, FnbExecutionContext executionContext)
         {
             _context = context;
+            _executionContext = executionContext;
         }
         public virtual async Task<T> AddAsync(T entity, bool flush = true, CancellationToken cancellationToken = default)
         {
@@ -32,12 +35,12 @@ namespace FlamboyantFnb.Infrastructure.Repository
 
         public virtual IQueryable<T> GetAll()
         {
-            return _context.Set<T>();
+            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId);
         }
 
         public virtual IQueryable<T> GetAllActive()
         {
-            return _context.Set<T>().Where(e => !e.IsDeleted);
+            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId && !e.IsDeleted);
         }
 
         public virtual IQueryable<T> GetByIdActive(int id)
@@ -48,7 +51,7 @@ namespace FlamboyantFnb.Infrastructure.Repository
         public virtual Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             // Scan all items
-            return _context.Set<T>().ToListAsync();
+            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId).ToListAsync();
         }
 
         public virtual async Task<T> GetByIdAsync(int id)
