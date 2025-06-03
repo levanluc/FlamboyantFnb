@@ -45,7 +45,17 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                     window.location.href = '/login';
                     return throwError(() => error);
                 }
-                this.toast.show(error.error?.message || 'Đã xảy ra lỗi máy chủ (500).');
+                this.toast.error(error.error?.message || 'Đã xảy ra lỗi máy chủ (500).',{
+                  duration: 5000,
+                  style: {
+                    padding: '16px',
+                    color: '#713200',
+                  },
+                  iconTheme: {
+                    primary: '#713200',
+                    secondary: '#FFFAEE',
+                  },
+                });
                 console.error('HTTP Error:', error);
                 return throwError(() => error);
             }),

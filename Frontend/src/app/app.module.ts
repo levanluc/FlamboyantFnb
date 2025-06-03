@@ -41,12 +41,8 @@ const routes: Routes = [
       multi: true
     },
     provideHotToastConfig({
-      duration: 3000,
-      position: 'bottom-right',
-      style: {
-        background: '#333',
-        color: '#fff'
-      }
+      duration: 2000,
+      position: 'top-right'
     })
   ],
   bootstrap: [AppComponent]
