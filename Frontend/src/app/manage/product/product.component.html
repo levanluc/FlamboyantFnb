@@ -1,1 +1,74 @@
-<p>product works!</p>
+<!-- Top Bar -->
+<div class="flex justify-end items-center rounded-lg mb-4">
+  <div class="flex gap-2">
+    <button class="bg-emerald-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors duration-200 flex items-center gap-2 shadow-sm" (click)="openAddProductModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+      </svg>
+      <span>Thêm mới</span>
+    </button>
+    <button class="bg-emerald-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors duration-200 flex items-center gap-2 shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+      <span>Import</span>
+    </button>
+    <button class="bg-emerald-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors duration-200 flex items-center gap-2 shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+      <span>Xuất file</span>
+    </button>
+  </div>
+</div>
+
+<!-- PrimeNG Table -->
+<div class="card rounded-lg shadow-md overflow-hidden">
+  <p-table
+    [value]="rows"
+    [(selection)]="selectedProducts"
+    dataKey="id"
+    [rows]="page.size"
+    [totalRecords]="page.totalElements"
+    [paginator]="true"
+    (onPage)="setPage($event)"
+    [lazy]="true"
+    [tableStyle]="{'min-width': '50rem'}"
+    paginatorPosition="bottom"
+    currentPageReportTemplate="Hiển thị {first} - {last} / Tổng số {totalRecords} hàng"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[15, 25, 50]"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Mã hàng</th>
+        <th>Tên hàng</th>
+        <th>Giá bán trước thuế</th>
+        <th>Giá vốn</th>
+        <th>Tồn kho</th>
+        <th>Thời gian tạo</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="product"></p-tableCheckbox>
+        </td>
+        <td><span class="text-emerald-600 font-medium">{{product.productCode}}</span></td>
+        <td>{{product.productName}}</td>
+        <td>{{product.priceBeforeTax}}</td>
+        <td>{{product.costPrice}}</td>
+        <td>{{product.inventory}}</td>
+        <td>{{product.createdAt}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="10" class="text-center">Không tìm thấy dữ liệu.</td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>

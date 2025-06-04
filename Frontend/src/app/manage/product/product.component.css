@@ -1,0 +1,61 @@
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.75rem 0.75rem; /* Adjust top/bottom and left/right padding as needed */
+  font-size: 0.83rem; /* Added to reduce font size (e.g., 14px) */
+}
+
+/* Optional: If you want to be more specific for selection column padding */
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th.p-selection-column,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td.p-selection-column {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem; /* Match other cells or make smaller/larger */
+  padding-right: 0.75rem; /* Match other cells or make smaller/larger */
+  width: 4rem; /* Ensure this aligns with your HTML if width is set there */
+  /* font-size will be inherited from the general rule above, but can be set specifically if needed */
+}
+
+/* Styles for Paginator Font Size */
+:host ::ng-deep .p-datatable .p-paginator {
+  font-size: 0.8rem; /* Adjust as needed */
+}
+
+:host ::ng-deep .p-datatable .p-paginator .p-paginator-current {
+  font-size: 0.75rem; /* Adjust as needed, typically for the "Showing x to y of z" text */
+}
+
+:host ::ng-deep .p-datatable .p-paginator .p-paginator-pages .p-paginator-page {
+  min-width: 2.25rem; /* Adjust to ensure buttons are adequately sized */
+  height: 2.25rem;   /* Adjust to ensure buttons are adequately sized */
+  font-size: 0.8rem; /* Match general paginator font size or set specifically */
+}
+
+:host ::ng-deep .p-datatable .p-paginator .p-dropdown {
+  font-size: 0.8rem; /* For the rows per page dropdown */
+}
+
+:host ::ng-deep .p-datatable .p-paginator .p-dropdown .p-dropdown-label {
+  font-size: 0.8rem; /* Ensure dropdown label also gets the size */
+}
+
+/* Styles for Checkbox Borders */
+:host ::ng-deep .p-datatable .p-checkbox .p-checkbox-box {
+  border: 1px solid #adb5bd; /* Default border - adjust color as needed */
+}
+
+/* Optional: Style for when the checkbox is focused */
+:host ::ng-deep .p-datatable .p-checkbox.p-checkbox-focused .p-checkbox-box {
+  border-color: #3b82f6; /* Tailwind's blue-500, or your theme's focus color */
+  /* box-shadow: 0 0 0 0.1rem rgba(59, 130, 246, 0.25); Example focus shadow, adjust as needed */
+}
+
+/* Ensure border is visible/styled when checkbox is checked */
+:host ::ng-deep .p-datatable .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #10b981; /* Tailwind's emerald-500, or your theme's active/checked color */
+  background-color: #10b981; /* Match background with border or set as desired */
+}
+
+/* Adjust icon color for better contrast if checkbox background changes significantly */
+:host ::ng-deep .p-datatable .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon {
+  color: #ffffff; /* White icon on a darker background */
+}

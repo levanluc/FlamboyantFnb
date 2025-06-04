@@ -1,76 +1,105 @@
-<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
-    <div class="bg-white w-full max-w-screen-xl rounded shadow-lg p-6 overflow-y-auto max-h-screen">
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+  <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)" class="w-full max-w-screen-xl">
+    <div class="bg-white rounded-xl shadow-2xl p-6 transform transition-all">
+      <!-- Header -->
       <div class="flex justify-between items-center border-b pb-3">
-        <h2 class="text-xl font-semibold">Thêm hàng</h2>
-        <button type="button" (click)="closeModal()" class="text-gray-500 hover:text-red-600">&times;</button>
+        <h2 class="text-xl font-bold text-gray-800">{{title}}</h2>
+        <button type="button" (click)="closeModal()" class="text-gray-400 hover:text-red-500 transition-colors duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
       <!-- Tabs -->
       <div class="flex space-x-4 border-b mt-4">
-        <button type="button" class="border-b-2 border-green-500 text-green-600 px-2 py-1">Thông tin</button>
-        <button type="button" class="px-2 py-1">Mô tả chi tiết</button>
+        <button type="button" class="border-b-2 border-emerald-500 text-emerald-600 px-3 py-1.5 font-medium transition-colors duration-200">Thông tin</button>
+        <button type="button" class="px-3 py-1.5 text-gray-500 hover:text-emerald-600 transition-colors duration-200">Mô tả chi tiết</button>
       </div>
 
       <!-- Form -->
-      <div class="grid grid-cols-2 gap-6 mt-6">
+      <div class="grid grid-cols-2 gap-4 mt-4">
         <!-- Left Column -->
-        <div class="space-y-4">
+        <div class="space-y-3">
           <div>
-            <label class="block text-sm">Mã hàng</label>
-            <input name="productCode" [(ngModel)]="formData.productCode" class="w-full border rounded p-2" placeholder="Mã hàng tự động" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Mã hàng</label>
+            <input name="productCode" [(ngModel)]="formData.productCode"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200"
+              placeholder="Mã hàng tự động" />
           </div>
           <div>
-            <label class="block text-sm">Mã vạch</label>
-            <input name="barcode" [(ngModel)]="formData.barcode" class="w-full border rounded p-2" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Mã vạch</label>
+            <input name="barcode" [(ngModel)]="formData.barcode"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
           <div>
-            <label class="block text-sm">Tên hàng</label>
-            <input name="productName" [(ngModel)]="formData.productName" class="w-full border rounded p-2" required />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tên hàng</label>
+            <input name="productName" [(ngModel)]="formData.productName" required
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
           <div>
-            <label class="block text-sm">Nhóm hàng</label>
-            <select name="productGroup" [(ngModel)]="formData.productGroup" class="w-full border rounded p-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nhóm hàng</label>
+            <select name="productGroup" [(ngModel)]="formData.productGroup"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
               <option>---Lựa chọn---</option>
             </select>
           </div>
 
           <!-- Images -->
-          <div class="flex space-x-2">
-            <div class="w-20 h-20 bg-gray-100 border rounded flex items-center justify-center text-gray-400">Ảnh</div>
+          <div class="flex space-x-3">
+            <div class="w-20 h-20 bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center text-gray-400 hover:border-emerald-500 hover:text-emerald-500 transition-colors duration-200 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+              </svg>
+            </div>
           </div>
         </div>
 
         <!-- Right Column -->
-        <div class="space-y-4">
+        <div class="space-y-3">
           <div>
-            <label class="block text-sm">Giá vốn</label>
-            <input type="number" name="costPrice" [(ngModel)]="formData.costPrice" class="w-full border rounded p-2" value="0" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Giá vốn</label>
+            <input type="number" name="costPrice" [(ngModel)]="formData.costPrice" value="0"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
           <div>
-            <label class="block text-sm">Giá bán trước thuế</label>
-            <input type="number" name="sellingPriceBeforeTax" [(ngModel)]="formData.sellingPriceBeforeTax" class="w-full border rounded p-2" value="0" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Giá bán trước thuế</label>
+            <input type="number" name="sellingPriceBeforeTax" [(ngModel)]="formData.sellingPriceBeforeTax" value="0"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
           <div>
-            <label class="block text-sm">Giá bán sau thuế</label>
-            <input type="number" name="sellingPriceAfterTax" [(ngModel)]="formData.sellingPriceAfterTax" class="w-full border rounded p-2" value="0" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Giá bán sau thuế</label>
+            <input type="number" name="sellingPriceAfterTax" [(ngModel)]="formData.sellingPriceAfterTax" value="0"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
           <div>
-            <label class="block text-sm">Tồn kho</label>
-            <input type="number" name="inventory" [(ngModel)]="formData.inventory" class="w-full border rounded p-2" value="0" />
+            <label class="block text-sm font-medium text-gray-700 mb-1">Tồn kho</label>
+            <input type="number" name="inventory" [(ngModel)]="formData.inventory" value="0"
+              class="w-full border border-gray-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
           </div>
         </div>
       </div>
 
       <!-- Expandable Sections -->
-      <div class="mt-6 space-y-2">
-        <button type="button" class="w-full text-left bg-gray-100 p-2 rounded">Đơn vị tính</button>
+      <div class="mt-4 space-y-2">
+        <button type="button" class="w-full text-left bg-gray-50 hover:bg-gray-100 p-3 rounded-lg transition-colors duration-200 flex items-center justify-between">
+          <span class="font-medium text-gray-700">Đơn vị tính</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </button>
       </div>
 
       <!-- Buttons -->
-      <div class="flex justify-end space-x-2 mt-6">
-        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded disabled:opacity-75 disabled:cursor-not-allowed" [disabled]="productForm.invalid">Lưu</button>
-        <button type="button" (click)="closeModal()" class="bg-gray-300 px-4 py-2 rounded">Bỏ qua</button>
+      <div class="flex justify-end space-x-3 mt-4">
+        <button type="button" (click)="closeModal()"
+          class="px-4 py-2 border border-gray-200 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors duration-200">
+          Bỏ qua
+        </button>
+        <button type="submit" [disabled]="productForm.invalid"
+          class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+          Lưu
+        </button>
       </div>
     </div>
   </form>

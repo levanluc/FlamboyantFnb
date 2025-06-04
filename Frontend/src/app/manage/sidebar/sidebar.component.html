@@ -1,30 +1,67 @@
-<div class="w-64 bg-white p-4 space-y-4 border-r">
-  <div>
-    <label class="block text-gray-700 font-semibold mb-1">Tìm kiếm</label>
-    <input type="text" placeholder="Theo mã, tên hàng" class="w-full border px-3 py-2 rounded" />
+<div class="w-64 bg-white p-6 space-y-6 border-r shadow-sm">
+  <!-- Search Section -->
+  <div class="relative">
+    <label class="block text-gray-700 font-semibold mb-2">Tìm kiếm</label>
+    <div class="relative">
+      <input type="text" placeholder="Theo mã, tên hàng"
+        class="w-full border border-gray-200 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200" />
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute right-3 top-1/2 transform -translate-y-1/2" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+      </svg>
+    </div>
   </div>
+
+  <!-- Branch Section -->
   <div>
-    <label class="block text-gray-700 font-semibold mb-1">Chi nhánh</label>
-    <select class="w-full border px-3 py-2 rounded">
+    <label class="block text-gray-700 font-semibold mb-2">Chi nhánh</label>
+    <select class="w-full border border-gray-200 px-4 py-2.5 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
       <option>Chi nhánh trung tâm</option>
     </select>
   </div>
+
+  <!-- Menu Type Section -->
   <div>
-    <label class="block text-gray-700 font-semibold mb-1">Loại thực đơn</label>
-    <div class="space-y-1">
-      <label class="block"><input type="checkbox" class="mr-2">Đồ ăn</label>
-      <label class="block"><input type="checkbox" class="mr-2">Đồ uống</label>
-      <label class="block"><input type="checkbox" class="mr-2">Khác</label>
+    <label class="block text-gray-700 font-semibold mb-2">Loại thực đơn</label>
+    <div class="space-y-2 bg-gray-50 p-3 rounded-lg">
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Đồ ăn</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Đồ uống</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Khác</span>
+      </label>
     </div>
   </div>
+
+  <!-- Product Type Section -->
   <div>
-    <label class="block text-gray-700 font-semibold mb-1">Loại hàng</label>
-    <div class="space-y-1">
-      <label class="block"><input type="checkbox" class="mr-2">Hàng hóa thường</label>
-      <label class="block"><input type="checkbox" class="mr-2">Hàng hóa - sản xuất</label>
-      <label class="block"><input type="checkbox" class="mr-2">Chế biến</label>
-      <label class="block"><input type="checkbox" class="mr-2">Dịch vụ</label>
-      <label class="block"><input type="checkbox" class="mr-2">Combo - Đóng gói</label>
+    <label class="block text-gray-700 font-semibold mb-2">Loại hàng</label>
+    <div class="space-y-2 bg-gray-50 p-3 rounded-lg">
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Hàng hóa thường</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Hàng hóa - sản xuất</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Chế biến</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Dịch vụ</span>
+      </label>
+      <label class="flex items-center space-x-2 hover:bg-white p-2 rounded transition-colors duration-200">
+        <input type="checkbox" class="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500">
+        <span>Combo - Đóng gói</span>
+      </label>
     </div>
   </div>
 </div>
