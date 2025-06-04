@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
 
   rows: any[] = []; // Holds the data for the current page
   selectedProducts: any[] = []; // Holds selected products
+  expandedRowId: number | null = null;
 
   // Pagination settings
   page = {
@@ -79,5 +80,9 @@ export class ProductComponent implements OnInit {
         title: 'Thêm hàng mới',
       },
     });
+  }
+
+  onRowClick(product: any) {
+    this.expandedRowId = this.expandedRowId === product.id ? null : product.id;
   }
 }
