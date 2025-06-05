@@ -6,6 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { BaseResponse } from '../models/responses/base-response.model';
 import User from '../entities/user';
 import { UserLoginRequest } from '../models/requests/user-login-request.model';
+import { Product } from '../models/requests/product.model';
 
 @Injectable({
     providedIn: 'root',
@@ -21,6 +22,13 @@ export default class UserDataService {
         return this.httpService.post<BaseResponse<User>>(
             `${this.apiUrl}/login`,
             request
+        );
+    }
+
+    createProduct(productData: Product): Observable<any> {
+        return this.httpService.post(
+            `${this.apiUrl}/product`,
+            productData
         );
     }
 }
