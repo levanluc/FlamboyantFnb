@@ -2,6 +2,7 @@ import { DialogService, DialogRef } from '@ngneat/dialog';
 import { Component, ChangeDetectionStrategy, inject, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { NumberOnlyDirective } from '../../../app/directives/number-only.directive';
 
 interface Data {
   title: string;
@@ -23,6 +24,8 @@ interface Data {
   imports: [
     CommonModule,
     FormsModule,
+    NumberOnlyDirective, // Assuming NumberOnlyDirective is imported correctly
+    // Add NumberOnlyDirective to imports
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

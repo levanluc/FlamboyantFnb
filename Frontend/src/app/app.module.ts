@@ -24,8 +24,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent, // Add LoginComponent to declarations
-    NumberOnlyDirective
+    LoginComponent
   ],
   imports: [
     BrowserModule,
