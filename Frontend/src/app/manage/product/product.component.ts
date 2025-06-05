@@ -22,6 +22,8 @@ export class ProductComponent implements OnInit {
     pageNumber: 0 // Current page number (0-indexed)
   };
 
+  productTab: { [productId: number]: 'info' | 'stock' } = {};
+
   // The columns are now defined in the HTML template with p-column
   // The old 'columns' array and ColumnMode from ngx-datatable are no longer needed.
 
@@ -83,6 +85,32 @@ export class ProductComponent implements OnInit {
   }
 
   onRowClick(product: any) {
-    this.expandedRowId = this.expandedRowId === product.id ? null : product.id;
+    if (this.expandedRowId === product.id) {
+      this.expandedRowId = null;
+    } else {
+      this.expandedRowId = product.id;
+      // Set default tab to 'info' when expanding a row
+      if (!this.productTab[product.id]) {
+        this.productTab[product.id] = 'info';
+      }
+    }
+  }
+
+  cleanNumber(value: any): number | null {
+    if (value == null || value === '') return null;
+    // Remove commas and convert to number
+    const num = Number((value + '').replace(/,/g, ''));
+    return isNaN(num) ? null : num;
+  }
+
+  parseDate(dateStr: string): Date | null {
+    if (!dateStr) return null;
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) return null;
+    // day/month/year
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // JS months are 0-based
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
   }
 }

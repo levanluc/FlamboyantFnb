@@ -1,6 +1,7 @@
 import { DialogService, DialogRef } from '@ngneat/dialog';
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 interface Data {
   title: string;
@@ -12,17 +13,23 @@ interface Data {
   sellingPriceBeforeTax?: number;
   sellingPriceAfterTax?: number;
   inventory?: number;
+  imageUrl?: string;
+  imageFile?: File;
 }
 
 @Component({
   templateUrl: './add-product-modal.component.html',
   standalone: true,
-  imports: [FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddProductModalComponent {
   ref: DialogRef<Data, boolean> = inject(DialogRef);
   formData: Data = { title: 'Thêm hàng mới' };
+  productTab: 'info' | 'stock' = 'info';
 
   get title() {
     return this.ref.data?.title || this.formData.title || 'Hello world';
@@ -48,5 +55,19 @@ export class AddProductModalComponent {
 
   closeModal(result?: any) {
     this.ref.close(result);
+  }
+
+  onImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.formData.imageUrl = e.target.result; // Store base64 string or preview URL
+      };
+      reader.readAsDataURL(file);
+      // Optionally, store the file itself for upload
+      this.formData.imageFile = file;
+    }
   }
 }
