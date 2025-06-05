@@ -59,3 +59,7 @@
 :host ::ng-deep .p-datatable .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon {
   color: #ffffff; /* White icon on a darker background */
 }
+
+:focus {
+  outline-color: #d3d3d3; /* Lighter border color */
+}

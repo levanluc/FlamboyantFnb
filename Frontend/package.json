@@ -22,6 +22,8 @@
     "@ngneat/overview": "^6.0.0",
     "@ngxpert/hot-toast": "^3.0.0",
     "ngx-spinner": "^18.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^17.18.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"

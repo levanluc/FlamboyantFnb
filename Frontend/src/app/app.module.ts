@@ -11,6 +11,7 @@ import { HttpErrorInterceptor } from '../interceptors/http-error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
+import { NumberOnlyDirective } from './directives/number-only.directive';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,7 +24,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent // Add LoginComponent to declarations
+    LoginComponent, // Add LoginComponent to declarations
+    NumberOnlyDirective
   ],
   imports: [
     BrowserModule,

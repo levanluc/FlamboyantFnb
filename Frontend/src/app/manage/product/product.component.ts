@@ -22,10 +22,7 @@ export class ProductComponent implements OnInit {
     pageNumber: 0 // Current page number (0-indexed)
   };
 
-  productTab: { [productId: number]: 'info' | 'stock' } = {};
-
-  // The columns are now defined in the HTML template with p-column
-  // The old 'columns' array and ColumnMode from ngx-datatable are no longer needed.
+  productTab: { [productId: number]: 'info' | 'stock' } = {}; // Correctly typed object
 
   ngOnInit() {
     this.loadProductData();
@@ -89,9 +86,9 @@ export class ProductComponent implements OnInit {
       this.expandedRowId = null;
     } else {
       this.expandedRowId = product.id;
-      // Set default tab to 'info' when expanding a row
+      // Ensure the value assigned is either 'info' or 'stock'
       if (!this.productTab[product.id]) {
-        this.productTab[product.id] = 'info';
+        this.productTab[product.id] = 'info'; // Default to 'info'
       }
     }
   }

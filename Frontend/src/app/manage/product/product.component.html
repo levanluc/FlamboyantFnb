@@ -1,5 +1,10 @@
 <!-- Top Bar -->
-<div class="flex justify-end items-center rounded-lg mb-4">
+<div class="flex justify-between items-center rounded-lg mb-4">
+  <!-- Title -->
+  <div class="text-lg font-bold text-gray-700">
+    Hàng hóa
+  </div>
+  <!-- Actions -->
   <div class="flex gap-2">
     <button class="bg-emerald-600 text-white px-4 py-2 text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors duration-200 flex items-center gap-2 shadow-sm" (click)="openAddProductModal()">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -41,9 +46,6 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 4rem">
-          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-        </th>
         <th>Mã hàng</th>
         <th>Tên hàng</th>
         <th>Giá bán trước thuế</th>
@@ -54,9 +56,6 @@
     </ng-template>
     <ng-template pTemplate="body" let-product>
       <tr (click)="onRowClick(product)" class="cursor-pointer hover:bg-emerald-50 transition">
-        <td>
-          <p-tableCheckbox [value]="product"></p-tableCheckbox>
-        </td>
         <td><span class="text-emerald-600 font-medium">{{product.productCode}}</span></td>
         <td>{{product.productName}}</td>
         <td>{{ cleanNumber(product.priceBeforeTax) !== null ? (cleanNumber(product.priceBeforeTax) | number) : '' }}</td>
@@ -65,34 +64,34 @@
         <td>{{ parseDate(product.createdAt) | date:'dd/MM/yyyy HH:mm' }}</td>
       </tr>
       <tr *ngIf="expandedRowId === product.id">
-        <td colspan="7" class="bg-white p-8 border-b border-emerald-100">
+        <td colspan="6" class="bg-white p-8 border-b border-emerald-100">
           <div>
             <!-- Tabs -->
             <div class="flex border-b mb-4">
               <button
                 class="px-4 py-2 -mb-px font-semibold border-b-2 transition-colors duration-200"
                 [ngClass]="{
-                  'border-emerald-600 text-emerald-700 bg-white': productTab === 'info',
-                  'border-transparent text-gray-500 bg-transparent hover:text-emerald-600': productTab !== 'info'
+                  'border-emerald-600 text-emerald-700 bg-white': productTab[product.id] === 'info',
+                  'border-transparent text-gray-500 bg-transparent hover:text-emerald-600': productTab[product.id] !== 'info'
                 }"
-                (click)="productTab = 'info'"
+                (click)="productTab[product.id] = 'info'"
               >
                 Thông tin
               </button>
               <button
                 class="px-4 py-2 -mb-px font-semibold border-b-2 transition-colors duration-200"
                 [ngClass]="{
-                  'border-emerald-600 text-emerald-700 bg-white': productTab === 'stock',
-                  'border-transparent text-gray-500 bg-transparent hover:text-emerald-600': productTab !== 'stock'
+                  'border-emerald-600 text-emerald-700 bg-white': productTab[product.id] === 'stock',
+                  'border-transparent text-gray-500 bg-transparent hover:text-emerald-600': productTab[product.id] !== 'stock'
                 }"
-                (click)="productTab = 'stock'"
+                (click)="productTab[product.id] = 'stock'"
               >
                 Thẻ kho
               </button>
             </div>
 
             <!-- Tab Content -->
-            <div *ngIf="productTab === 'info'">
+            <div *ngIf="productTab[product.id] === 'info'">
               <div class="flex flex-col md:flex-row gap-8">
                 <!-- Product Image -->
                 <div class="flex flex-col items-center gap-4">
@@ -168,7 +167,7 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="productTab === 'stock'">
+            <div *ngIf="productTab[product.id] === 'stock'">
               <!-- Thẻ kho content here -->
               <div class="text-gray-500 italic p-8 text-center">Chưa có dữ liệu thẻ kho.</div>
             </div>
@@ -178,7 +177,7 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
         <tr>
-            <td colspan="10" class="text-center">Không tìm thấy dữ liệu.</td>
+            <td colspan="6" class="text-center">Không tìm thấy dữ liệu.</td>
         </tr>
     </ng-template>
   </p-table>

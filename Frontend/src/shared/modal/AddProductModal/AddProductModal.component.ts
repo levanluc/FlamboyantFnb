@@ -1,5 +1,5 @@
 import { DialogService, DialogRef } from '@ngneat/dialog';
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -30,6 +30,7 @@ export class AddProductModalComponent {
   ref: DialogRef<Data, boolean> = inject(DialogRef);
   formData: Data = { title: 'Thêm hàng mới' };
   productTab: 'info' | 'stock' = 'info';
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   get title() {
     return this.ref.data?.title || this.formData.title || 'Hello world';
@@ -64,6 +65,7 @@ export class AddProductModalComponent {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.formData.imageUrl = e.target.result; // Store base64 string or preview URL
+        this.cdr.detectChanges(); // Trigger change detection to update the view immediately
       };
       reader.readAsDataURL(file);
       // Optionally, store the file itself for upload
