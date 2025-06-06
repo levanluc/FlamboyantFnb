@@ -21,6 +21,7 @@
     "@ngneat/dialog": "^5.1.2",
     "@ngneat/overview": "^6.0.0",
     "@ngxpert/hot-toast": "^3.0.0",
+    "ngx-select-dropdown": "^3.3.2",
     "ngx-spinner": "^18.0.0",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.0",
