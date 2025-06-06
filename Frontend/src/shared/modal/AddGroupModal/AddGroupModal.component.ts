@@ -2,11 +2,10 @@ import { DialogRef } from '@ngneat/dialog';
 import { Component, ChangeDetectionStrategy, inject, ChangeDetectorRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProductGroupDataService } from '../../../services/product-group-data.service';
+import { CategoryDataService } from '../../../services/category-data.service';
 
 interface GroupData {
   groupName: string;
-  groupCode?: string;
 }
 
 @Component({
@@ -18,12 +17,17 @@ interface GroupData {
 export class AddGroupModalComponent {
   ref: DialogRef<GroupData, boolean> = inject(DialogRef);
   formData: GroupData = { groupName: '' };
-  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
-  private productGroupDataService = inject(ProductGroupDataService);
+  constructor(private categoryDataService: CategoryDataService, private cdr: ChangeDetectorRef) {
+    // Initialize formData if needed
+    this.formData = { groupName: ''};
+  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
-      this.productGroupDataService.createProductGroup(this.formData).subscribe({
+      var newCategoryRequest = {
+        Name: this.formData.groupName
+      };
+      this.categoryDataService.createCategory(newCategoryRequest).subscribe({
         next: (response) => {
           this.ref.close(response);
         },

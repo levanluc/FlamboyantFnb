@@ -1,11 +1,12 @@
-﻿using System;
+﻿using FlamboyantFnb.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FlamboyantFnb.Domain.Entities
 {
-    public class User : BaseEntity
+    public class User : BaseEntity, IMerchantId
     {
         public string FullName { get; set; }
         public string Avatar { get; set; }

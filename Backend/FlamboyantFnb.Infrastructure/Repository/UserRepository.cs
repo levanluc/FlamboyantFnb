@@ -1,4 +1,5 @@
-﻿using FlamboyantFnb.Domain.Entities;
+﻿using FlamboyantFnb.Domain.Context;
+using FlamboyantFnb.Domain.Entities;
 using FlamboyantFnb.Domain.Interfaces.Repository;
 using FlamboyantFnb.Domain.RequestModel;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ namespace FlamboyantFnb.Infrastructure.Repository
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        public UserRepository(FnbDbContext context) : base(context)
+        public UserRepository(FnbDbContext context, FnbExecutionContext executionContext) : base(context, executionContext)
         {
         }
 

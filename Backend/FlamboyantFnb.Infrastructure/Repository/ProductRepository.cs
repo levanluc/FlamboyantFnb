@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace FlamboyantFnb.Infrastructure.Repository
 {
-    public class MerchantRepository : BaseRepository<Merchant>, IMerchantRepository
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        public MerchantRepository(FnbDbContext context, FnbExecutionContext executionContext) : base(context, executionContext)
+        public ProductRepository(FnbDbContext context, FnbExecutionContext executionContext) : base(context, executionContext)
         {
         }
     }

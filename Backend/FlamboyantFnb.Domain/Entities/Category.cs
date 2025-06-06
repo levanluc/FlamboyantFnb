@@ -1,11 +1,13 @@
-﻿using System;
+﻿using FlamboyantFnb.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace FlamboyantFnb.Domain.Entities
 {
-    public class Category : BaseEntity
+    [Table("Categories")]
+    public class Category : BaseEntity, IMerchantId
     {
         public string Name { get; set; }
         public int MerchantId { get; set; }

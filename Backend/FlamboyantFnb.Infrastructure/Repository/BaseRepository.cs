@@ -1,5 +1,6 @@
 ﻿using FlamboyantFnb.Domain.Context;
 using FlamboyantFnb.Domain.Entities;
+using FlamboyantFnb.Domain.Interfaces;
 using FlamboyantFnb.Domain.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,12 +36,22 @@ namespace FlamboyantFnb.Infrastructure.Repository
 
         public virtual IQueryable<T> GetAll()
         {
-            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId);
+            var query = _context.Set<T>().Where(e => true);
+            if (typeof(T) is IMerchantId)
+            {
+                query = query.Where(e => ((IMerchantId)e).MerchantId == _executionContext.MerchantId);
+            }
+            return query;
         }
 
         public virtual IQueryable<T> GetAllActive()
         {
-            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId && !e.IsDeleted);
+            var query = _context.Set<T>().Where(e => !e.IsDeleted);
+            if (typeof(T) is IMerchantId)
+            {
+                query = query.Where(e => ((IMerchantId)e).MerchantId == _executionContext.MerchantId);
+            }
+            return query;
         }
 
         public virtual IQueryable<T> GetByIdActive(int id)
@@ -50,8 +61,12 @@ namespace FlamboyantFnb.Infrastructure.Repository
 
         public virtual Task<List<T>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            // Scan all items
-            return _context.Set<T>().Where(e => e.MerchantId == _executionContext.MerchantId).ToListAsync();
+            var query = _context.Set<T>().Where(e => true);
+            if (typeof(T) is IMerchantId)
+            {
+                query = query.Where(e => ((IMerchantId)e).MerchantId == _executionContext.MerchantId);
+            }
+            return query.ToListAsync();
         }
 
         public virtual async Task<T> GetByIdAsync(int id)
