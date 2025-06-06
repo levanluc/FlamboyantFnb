@@ -12,6 +12,7 @@ using System.Threading;
 
 namespace FlamboyantFnb.Controllers
 {
+    [Authenticate]
     public class CategoryController : BaseController
     {
         private readonly ICategoryRepository _categoryRepository;

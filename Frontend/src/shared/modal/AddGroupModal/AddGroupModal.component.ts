@@ -3,6 +3,7 @@ import { Component, ChangeDetectionStrategy, inject, ChangeDetectorRef } from '@
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CategoryDataService } from '../../../services/category-data.service';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 interface GroupData {
   groupName: string;
@@ -17,7 +18,9 @@ interface GroupData {
 export class AddGroupModalComponent {
   ref: DialogRef<GroupData, boolean> = inject(DialogRef);
   formData: GroupData = { groupName: '' };
-  constructor(private categoryDataService: CategoryDataService, private cdr: ChangeDetectorRef) {
+  constructor(private categoryDataService: CategoryDataService, private cdr: ChangeDetectorRef,
+    private toast: HotToastService
+  ) {
     // Initialize formData if needed
     this.formData = { groupName: ''};
   }
@@ -29,6 +32,7 @@ export class AddGroupModalComponent {
       };
       this.categoryDataService.createCategory(newCategoryRequest).subscribe({
         next: (response) => {
+          this.toast.success('Thêm nhóm hàng thành công!');
           this.ref.close(response);
         },
         error: (err) => {
