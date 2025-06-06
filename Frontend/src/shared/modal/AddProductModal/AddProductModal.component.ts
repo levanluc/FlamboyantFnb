@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import UserDataService from '../../../services/userdata.service';
 import { Product } from '../../../models/requests/product.model';
 import { AddGroupModalComponent } from '../AddGroupModal/AddGroupModal.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 interface Data {
   title: string;
@@ -30,7 +31,7 @@ interface Data {
     CommonModule,
     FormsModule,
     NumberOnlyDirective, // Assuming NumberOnlyDirective is imported correctly
-    // Add NumberOnlyDirective to imports
+    SelectDropDownModule, // Correct module for ngx-select-dropdown
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -45,6 +46,13 @@ export class AddProductModalComponent {
   private dialog: DialogService = inject(DialogService);
 
   @Input() onProductCreated?: (response: any) => void;
+
+  productGroups: Array<{ name: string; id: string }> = [
+    { name: 'Đồ uống', id: '1' },
+    { name: 'Đồ ăn', id: '2' },
+    { name: 'Combo', id: '3' },
+    { name: 'Khác', id: '4' },
+  ];
 
   get title() {
     return this.ref.data?.title || this.formData.title || 'Hello world';

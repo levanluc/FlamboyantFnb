@@ -53,7 +53,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                   },
                   iconTheme: {
                     primary: '#713200',
-                    secondary: '#FFFAEE',
+                    secondary: '#ffdddd',
                   },
                 });
                 console.error('HTTP Error:', error);
